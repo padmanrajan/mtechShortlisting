@@ -72,9 +72,6 @@ data['NewUG'] = ugNew
 
 
 
-
-
-
 # choose the program of interest
 pgmString = 'Signal Processing and Communications (SPCOM)'
 
@@ -82,7 +79,23 @@ pgmString = 'Signal Processing and Communications (SPCOM)'
 x = data[(data.MainArea1==pgmString) | (data.MainArea2==pgmString) |
 (data.MainArea3==pgmString)]
 
-# Now divide into categories
+# make sure UG course is valid for program
+# check the correct UG degree
+string1 = 'ECE'
+string2 = 'EEE'
+string3 = 'IN'
+x_deg = x[(x.NewUG==string1)|(x.NewUG==string2)|(x.NewUG==string3)]
+
+
+# check gate
+gateString = 'EC - Electronics and Communication Engineering'
+x_deg_gate = x_deg[x_deg.EntranceSubjectName==gateString]
+
+
+# Now apply category-wise selection criteria
+
+
+# Divide into categories
 catGen = 'GEN'
 catEws = 'GEN(EWS)'
 catObcCl = 'OBC(CL)'
@@ -91,61 +104,118 @@ catSc = 'SC'
 catSt = 'ST'
 #catPd
 
+
 ##########################################
 
-# for general and Obc CL
+# for general and Obc CL and Obc NCL
 
 # get the list of general and CL catergory 
-x_gen = x[(x.CasteCategoryName==catGen) | (x.CasteCategoryName==catObcCl)]
-
-# check the correct UG degree
-string1 = 'ECE'
-string2 = 'EEE'
-string3 = 'IN'
-x_gen_deg = x_gen[(x_gen.NewUG==string1)|(x_gen.NewUG==string2)|(x_gen.NewUG==string3)]
-
-# check gate
-gateString = 'EC - Electronics and Communication Engineering'
-x_gen_deg_gate = x_gen_deg[x_gen_deg.EntranceSubjectName==gateString]
+x_deg_gate_cat = x_deg_gate[(x_deg_gate.CasteCategoryName==catGen) | (x_deg_gate.CasteCategoryName==catObcCl) | (x_deg_gate.CasteCategoryName==catObcNcl)]
 
 # check gate_score
-gateCutoff = 700
-x_gen_deg_gate_gscore = x_gen_deg_gate[x_gen_deg_gate.EntranceScore > gateCutoff]
+gateCutoff = 500
+x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
 
 # check UG marks
-ugCutoff = 7.5
-x_gen_deg_gate_gscore_ugscore = x_gen_deg_gate_gscore[x_gen_deg_gate_gscore.NewCGPA > ugCutoff]
+ugCutoff = 6
+x_deg_gate_cat_gscore_ugscore = x_deg_gate_cat_gscore[x_deg_gate_cat_gscore.NewCGPA >= ugCutoff]
+# copy to final variable for convenience
+final_x_deg_gate_gen_gscore_ugscore = x_deg_gate_cat_gscore_ugscore
 
 # write to output
-outFile = outputDir +'spcom_gen_obccl.xls'
-x_gen_deg_gate_gscore_ugscore.to_excel(outFile)
+outFile = outputDir +'spcom_genObcclObcNcl.xls'
+x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 
  
 ###################################################
 
 # for SC
-
 # get the list of general and CL catergory 
-x_sc = x[x.CasteCategoryName==catSc]
-# get the correct UG degree
-#x_gen_deg
-# currently this is not possible, because input is not standard
-# this is TODO
-
-# check gate
-gateString = 'EC - Electronics and Communication Engineering'
-x_sc_gate = x_sc[x_sc.EntranceSubjectName==gateString]
+x_deg_gate_cat = x_deg_gate[x_deg_gate.CasteCategoryName==catSc]
 
 # check gate_score
-gateCutoff = 200
-x_sc_gate_gscore = x_sc_gate[x_sc_gate.EntranceScore > gateCutoff]
+gateCutoff = 400
+x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
 
 # check UG marks
-ugCutoff = 5.0
-x_sc_gate_gscore_ugscore = x_sc_gate_gscore[x_sc_gate_gscore.NewCGPA > ugCutoff]
+ugCutoff = 5.5
+x_deg_gate_cat_gscore_ugscore = x_deg_gate_cat_gscore[x_deg_gate_cat_gscore.NewCGPA >= ugCutoff]
+final_x_deg_gate_sc_gscore_ugscore = x_deg_gate_cat_gscore_ugscore
 
 # write to output
 outFile = outputDir +'spcom_sc.xls'
-x_sc_gate_gscore_ugscore.to_excel(outFile)
+x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 
 
+##########################################
+
+# for EWS
+
+# get the list of general and CL catergory 
+x_deg_gate_cat = x_deg_gate[x_deg_gate.CasteCategoryName==catEws]
+
+# check gate_score
+gateCutoff = 400
+x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
+
+# check UG marks
+ugCutoff = 5.5
+x_deg_gate_cat_gscore_ugscore = x_deg_gate_cat_gscore[x_deg_gate_cat_gscore.NewCGPA >= ugCutoff]
+# copy to final variable for convenience
+final_x_deg_gate_ews_gscore_ugscore = x_deg_gate_cat_gscore_ugscore
+
+# write to output
+outFile = outputDir +'spcom_ews.xls'
+x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
+
+ 
+###################################################
+
+##########################################
+
+# for ST
+
+# get the list of general and CL catergory 
+x_deg_gate_cat = x_deg_gate[x_deg_gate.CasteCategoryName==catSt]
+
+# check gate_score
+gateCutoff = 400
+x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
+
+# check UG marks
+ugCutoff = 5.5
+x_deg_gate_cat_gscore_ugscore = x_deg_gate_cat_gscore[x_deg_gate_cat_gscore.NewCGPA >= ugCutoff]
+# copy to final variable for convenience
+final_x_deg_gate_st_gscore_ugscore = x_deg_gate_cat_gscore_ugscore
+
+# write to output
+outFile = outputDir +'spcom_st.xls'
+x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
+
+ 
+###################################################
+
+
+##########################################
+
+## for PD
+
+# get the list of general and CL catergory 
+x_deg_gate_cat = x_deg_gate[x_deg_gate.ISPhysicallyChallenged=='Yes']
+
+# check gate_score
+gateCutoff = 400
+x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
+
+# check UG marks
+ugCutoff = 5.5
+x_deg_gate_cat_gscore_ugscore = x_deg_gate_cat_gscore[x_deg_gate_cat_gscore.NewCGPA >= ugCutoff]
+# copy to final variable for convenience
+final_x_deg_gate_pd_gscore_ugscore = x_deg_gate_cat_gscore_ugscore
+
+## write to output
+outFile = outputDir +'spcom_pd.xls'
+x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
+#
+ 
+###################################################
