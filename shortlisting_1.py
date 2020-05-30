@@ -49,6 +49,30 @@ for i in range(len(cgCol)):
 # Append this to dataframe
 data['NewCGPA'] = cgNew
    
+# We also need to process the non-standard UG degrees.
+# this is TODO in the OAS form.
+# We will form a new column with standard values.
+ugCol = data.UGStream
+ugNew = pd.Series(np.zeros(len(ugCol)))
+# iterate through this series
+for i in range(len(ugCol)):
+    if 'electron' in ugCol[i].lower():
+        ugNew[i] = 'ECE'
+    elif 'inst'in ugCol[i].lower():
+        ugNew[i] = 'INS'
+    elif 'electrical'in ugCol[i].lower():
+        ugNew[i] = 'EEE'
+    elif 'compu'in ugCol[i].lower():
+        ugNew[i] = 'CSE'
+    else:
+        ugNew[i] = ugCol[i]
+
+data['NewUG'] = ugNew
+
+
+
+
+
 
 
 # choose the program of interest
@@ -73,26 +97,28 @@ catSt = 'ST'
 
 # get the list of general and CL catergory 
 x_gen = x[(x.CasteCategoryName==catGen) | (x.CasteCategoryName==catObcCl)]
-# get the correct UG degree
-#x_gen_deg
-# currently this is not possible, because input is not standard
-# this is TODO
+
+# check the correct UG degree
+string1 = 'ECE'
+string2 = 'EEE'
+string3 = 'IN'
+x_gen_deg = x_gen[(x_gen.NewUG==string1)|(x_gen.NewUG==string2)|(x_gen.NewUG==string3)]
 
 # check gate
 gateString = 'EC - Electronics and Communication Engineering'
-x_gen_gate = x_gen[x_gen.EntranceSubjectName==gateString]
+x_gen_deg_gate = x_gen_deg[x_gen_deg.EntranceSubjectName==gateString]
 
 # check gate_score
 gateCutoff = 700
-x_gen_gate_gscore = x_gen_gate[x_gen_gate.EntranceScore > gateCutoff]
+x_gen_deg_gate_gscore = x_gen_deg_gate[x_gen_deg_gate.EntranceScore > gateCutoff]
 
 # check UG marks
 ugCutoff = 7.5
-x_gen_gate_gscore_ugscore = x_gen_gate_gscore[x_gen_gate_gscore.NewCGPA > ugCutoff]
+x_gen_deg_gate_gscore_ugscore = x_gen_deg_gate_gscore[x_gen_deg_gate_gscore.NewCGPA > ugCutoff]
 
 # write to output
 outFile = outputDir +'spcom_gen_obccl.xls'
-x_gen_gate_gscore_ugscore.to_excel(outFile)
+x_gen_deg_gate_gscore_ugscore.to_excel(outFile)
 
  
 ###################################################
