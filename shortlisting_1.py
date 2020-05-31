@@ -56,11 +56,13 @@ ugCol = data.UGStream
 ugNew = pd.Series(np.zeros(len(ugCol)))
 # iterate through this series
 for i in range(len(ugCol)):
-    if 'electron' in ugCol[i].lower():
-        ugNew[i] = 'ECE'
+    if 'trical' in ugCol[i].lower():
+        ugNew[i] = 'EEE'
     elif 'inst'in ugCol[i].lower():
         ugNew[i] = 'INS'
-    elif 'electrical'in ugCol[i].lower():
+    elif 'ectronic'in ugCol[i].lower():
+        ugNew[i] = 'ECE'
+    elif 'power'in ugCol[i].lower():
         ugNew[i] = 'EEE'
     elif 'compu'in ugCol[i].lower():
         ugNew[i] = 'CSE'
