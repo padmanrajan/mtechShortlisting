@@ -62,6 +62,8 @@ for i in range(len(ugCol)):
         ugNew[i] = 'INS'
     elif 'electrical'in ugCol[i].lower():
         ugNew[i] = 'EEE'
+    elif 'power'in ugCol[i].lower():
+        ugNew[i] = 'EEE'
     elif 'compu'in ugCol[i].lower():
         ugNew[i] = 'CSE'
     else:
@@ -73,7 +75,7 @@ data['NewUG'] = ugNew
 
 
 # choose the program of interest
-pgmString = 'Signal Processing and Communications (SPCOM)'
+pgmString = 'Power Electronics and Drive (PED)'
 
 # get all applicants to pgm
 x = data[(data.MainArea1==pgmString) | (data.MainArea2==pgmString) |
@@ -81,15 +83,13 @@ x = data[(data.MainArea1==pgmString) | (data.MainArea2==pgmString) |
 
 # make sure UG course is valid for program
 # check the correct UG degree
-string1 = 'ECE'
-string2 = 'EEE'
-string3 = 'IN'
-x_deg = x[(x.NewUG==string1)|(x.NewUG==string2)|(x.NewUG==string3)]
+string1 = 'EEE'
+x_deg = x[x.NewUG==string1]
 
 
 # check gate
-gateString = 'EC - Electronics and Communication Engineering'
-x_deg_gate = x_deg[x_deg.EntranceSubjectName==gateString]
+gateString1 = 'EE - Electrical Engineering'
+x_deg_gate = x_deg[(x_deg.EntranceSubjectName==gateString1)]
 
 
 # Now apply category-wise selection criteria
@@ -109,6 +109,7 @@ catSt = 'ST'
 
 # for general and Obc CL and Obc NCL
 
+# get the list of general and CL catergory 
 x_deg_gate_cat = x_deg_gate[(x_deg_gate.CasteCategoryName==catGen) | (x_deg_gate.CasteCategoryName==catObcCl) | (x_deg_gate.CasteCategoryName==catObcNcl)]
 
 # check gate_score
@@ -122,14 +123,13 @@ x_deg_gate_cat_gscore_ugscore = x_deg_gate_cat_gscore[x_deg_gate_cat_gscore.NewC
 final_x_deg_gate_gen_gscore_ugscore = x_deg_gate_cat_gscore_ugscore
 
 # write to output
-outFile = outputDir +'spcom_genObcclObcNcl.xls'
+outFile = outputDir +'power_genObcclObcNcl.xls'
 x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 
  
 ###################################################
 
 # for SC
-
 x_deg_gate_cat = x_deg_gate[x_deg_gate.CasteCategoryName==catSc]
 
 # check gate_score
@@ -142,14 +142,13 @@ x_deg_gate_cat_gscore_ugscore = x_deg_gate_cat_gscore[x_deg_gate_cat_gscore.NewC
 final_x_deg_gate_sc_gscore_ugscore = x_deg_gate_cat_gscore_ugscore
 
 # write to output
-outFile = outputDir +'spcom_sc.xls'
+outFile = outputDir +'power_sc.xls'
 x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 
 
 ##########################################
 
 # for EWS
-
 x_deg_gate_cat = x_deg_gate[x_deg_gate.CasteCategoryName==catEws]
 
 # check gate_score
@@ -163,7 +162,7 @@ x_deg_gate_cat_gscore_ugscore = x_deg_gate_cat_gscore[x_deg_gate_cat_gscore.NewC
 final_x_deg_gate_ews_gscore_ugscore = x_deg_gate_cat_gscore_ugscore
 
 # write to output
-outFile = outputDir +'spcom_ews.xls'
+outFile = outputDir +'power_ews.xls'
 x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 
  
@@ -173,6 +172,7 @@ x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 
 # for ST
 
+# get the list of general and CL catergory 
 x_deg_gate_cat = x_deg_gate[x_deg_gate.CasteCategoryName==catSt]
 
 # check gate_score
@@ -186,7 +186,7 @@ x_deg_gate_cat_gscore_ugscore = x_deg_gate_cat_gscore[x_deg_gate_cat_gscore.NewC
 final_x_deg_gate_st_gscore_ugscore = x_deg_gate_cat_gscore_ugscore
 
 # write to output
-outFile = outputDir +'spcom_st.xls'
+outFile = outputDir +'power_st.xls'
 x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 
  
@@ -197,6 +197,7 @@ x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 
 ## for PD
 
+# get the list of general and CL catergory 
 x_deg_gate_cat = x_deg_gate[x_deg_gate.ISPhysicallyChallenged=='Yes']
 
 # check gate_score
@@ -210,7 +211,7 @@ x_deg_gate_cat_gscore_ugscore = x_deg_gate_cat_gscore[x_deg_gate_cat_gscore.NewC
 final_x_deg_gate_pd_gscore_ugscore = x_deg_gate_cat_gscore_ugscore
 
 ## write to output
-outFile = outputDir +'spcom_pd.xls'
+outFile = outputDir +'power_pd.xls'
 x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 #
  
