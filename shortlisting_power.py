@@ -107,10 +107,10 @@ catSt = 'ST'
 
 ##########################################
 
-# for general and Obc CL and Obc NCL
+# for general and Obc CL 
 
 # get the list of general and CL catergory 
-x_deg_gate_cat = x_deg_gate[(x_deg_gate.CasteCategoryName==catGen) | (x_deg_gate.CasteCategoryName==catObcCl) | (x_deg_gate.CasteCategoryName==catObcNcl)]
+x_deg_gate_cat = x_deg_gate[(x_deg_gate.CasteCategoryName==catGen) | (x_deg_gate.CasteCategoryName==catObcCl)]
 
 # check gate_score
 gateCutoff = 500
@@ -123,11 +123,45 @@ x_deg_gate_cat_gscore_ugscore = x_deg_gate_cat_gscore[x_deg_gate_cat_gscore.NewC
 final_x_deg_gate_gen_gscore_ugscore = x_deg_gate_cat_gscore_ugscore
 
 # write to output
-outFile = outputDir +'power_genObcclObcNcl.xls'
+outFile = outputDir +'power_genObccl.xls'
 x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 
  
 ###################################################
+
+##########################################
+
+# for Obc NCL 
+
+# get the list of general and CL catergory 
+x_deg_gate_cat = x_deg_gate[(x_deg_gate.CasteCategoryName==catObcNcl)]
+
+# check gate_score
+gateCutoff = 500
+x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
+
+# check UG marks
+ugCutoff = 6
+x_deg_gate_cat_gscore_ugscore = x_deg_gate_cat_gscore[x_deg_gate_cat_gscore.NewCGPA >= ugCutoff]
+# copy to final variable for convenience
+final_x_deg_gate_obcncl_gscore_ugscore = x_deg_gate_cat_gscore_ugscore
+
+# write to output
+outFile = outputDir +'power_obcNcl.xls'
+x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
+
+ 
+###################################################
+
+
+
+
+
+
+
+
+
+
 
 # for SC
 x_deg_gate_cat = x_deg_gate[x_deg_gate.CasteCategoryName==catSc]
