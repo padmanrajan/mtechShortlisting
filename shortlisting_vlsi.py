@@ -29,19 +29,20 @@ cgNew = pd.Series(np.zeros(len(cgCol)))
 # iterate through the cgCol series
 for i in range(len(cgCol)):
     # check if its CGPA or per
-    if 'CGPA' in cgCol[i]:
+    foo = cgCol[i].strip()
+    if 'CGPA' in foo:
         try:
-            cgNew[i] = float(cgCol[i][0:4])
+            cgNew[i] = float(foo[0:4])
         except ValueError:
-            print('CGPA ValueError in index ' + str(i) + ' ' + cgCol[i][0:4])
-            cgNew[i] = float(cgCol[i][0:2])
+            print('CGPA ValueError in index ' + str(i) + ' ' + foo[0:4])
+            cgNew[i] = float(foo[0:2])
     else:
         try:
             # convert i=per to cgpa
-            cgNew[i] = float(cgCol[i][0:4])/10
+            cgNew[i] = float(foo[0:4])/10
         except ValueError:
-            print('Per ValueError in index ' + str(i) + ' ' + cgCol[i][0:4])
-            cgNew[i] = float(cgCol[i][0:2])/10
+            print('Per ValueError in index ' + str(i) + ' ' + foo[0:4])
+            cgNew[i] = float(foo[0:2])/10
     
 
 
@@ -182,11 +183,11 @@ x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 x_deg_gate_cat = x_deg_gate[x_deg_gate.CasteCategoryName==catEws]
 
 # check gate_score
-gateCutoff = 400
+gateCutoff = 500
 x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
 
 # check UG marks
-ugCutoff = 5.5
+ugCutoff = 6
 x_deg_gate_cat_gscore_ugscore = x_deg_gate_cat_gscore[x_deg_gate_cat_gscore.NewCGPA >= ugCutoff]
 # copy to final variable for convenience
 final_x_deg_gate_ews_gscore_ugscore = x_deg_gate_cat_gscore_ugscore
