@@ -79,7 +79,9 @@ stCount = 3
 ewsCount = 2
 pdCount = 2
 outDir = '/home/paddy/laptopLocal/localWork/msPhDAug2020/MTech_shortlisting/mtech_process/output/'
-outfile = outDir + 'scee_spcom_coap_list.xls'
+outfile = outDir + 'scee_spcom_coap_selected.xls'
+outfileWL = outDir + 'scee_spcom_coap_WL.xls'
+
 
 dfGen = pd.read_excel(genDataFile)
 dfObc = pd.read_excel(obcDataFile)
@@ -114,17 +116,28 @@ dfCoapPd = processGateNumber(dfCoapPd)
 print('Done Gate code fixing')
 
 # Now prepare the final list
-print('Preparing final list')
-dfFinal = dfCoapGen.head(genCount)
-dfFinal = dfFinal.append(dfCoapObc.head(obcCount))
-dfFinal = dfFinal.append(dfCoapSc.head(scCount))
-dfFinal = dfFinal.append(dfCoapSt.head(stCount))
-dfFinal = dfFinal.append(dfCoapEws.head(ewsCount))
-dfFinal = dfFinal.append(dfCoapPd.head(pdCount))
-print('Done preparing final list')
+print('Preparing final lists')
+# Selected list
+dfSelected = dfCoapGen.head(genCount)
+dfSelected = dfSelected.append(dfCoapObc.head(obcCount))
+dfSelected = dfSelected.append(dfCoapSc.head(scCount))
+dfSelected = dfSelected.append(dfCoapSt.head(stCount))
+dfSelected = dfSelected.append(dfCoapEws.head(ewsCount))
+dfSelected = dfSelected.append(dfCoapPd.head(pdCount))
+# Waiting list
+dfWL = dfCoapGen.tail(len(dfCoapGen)-genCount)
+dfWL = dfWL.append(dfCoapObc.tail(len(dfCoapObc)-obcCount))
+dfWL = dfWL.append(dfCoapSc.tail(len(dfCoapSc)-scCount))
+dfWL = dfWL.append(dfCoapSt.tail(len(dfCoapSt)-stCount))
+dfWL = dfWL.append(dfCoapEws.tail(len(dfCoapEws)-ewsCount))
+dfWL = dfWL.append(dfCoapPd.tail(len(dfCoapPd)-pdCount))
+print('Done preparing final lists')
 
 # re-order columns in the way we want
-dfFinal = dfFinal[['ApplicationNo','AppStatus','Remarks','SubmissionDate','GATENo','RegistrationNo','EntranceScore', 'Name','OfferedPgm','CasteCategoryName','RoundNum', 'InstiName', 'InstiId', 'InstiType']]
+dfSelected = dfSelected[['ApplicationNo','AppStatus','Remarks','SubmissionDate','GATENo','RegistrationNo','EntranceScore', 'Name','OfferedPgm','CasteCategoryName','RoundNum', 'InstiName', 'InstiId', 'InstiType']]
+dfWL = dfWL[['ApplicationNo','AppStatus','Remarks','SubmissionDate','GATENo','RegistrationNo','EntranceScore', 'Name','OfferedPgm','CasteCategoryName','RoundNum', 'InstiName', 'InstiId', 'InstiType']]
+
 
 # write output to file
-dfFinal.to_excel(outfile,index=False)
+dfSelected.to_excel(outfile,index=False)
+dfWL.to_excel(outfileWL,index=False)
