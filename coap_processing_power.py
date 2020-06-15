@@ -62,7 +62,8 @@ def processGateNumber(df):
 
 
 # datafiles
-dataDir = '/home/paddy/laptopLocal/localWork/msPhDAug2020/MTech_shortlisting/mtech_process/output/'
+wrkDir = '/home/paddy/pappu/academic/msPhdCandidatesShortlisting/may2020/mtechShorlisting2020/'
+dataDir = wrkDir + 'MTech_shortlisting/mtech_process/output/'
 genDataFile = dataDir + 'power_genObccl.xls'
 obcDataFile = dataDir + 'power_obcNcl.xls'
 scDataFile = dataDir + 'power_sc.xls'
@@ -76,9 +77,9 @@ genCount = 17
 obcCount = 10
 scCount = 6
 stCount = 3
-ewsCount = 2
+ewsCount = 1
 pdCount = 2
-outDir = '/home/paddy/laptopLocal/localWork/msPhDAug2020/MTech_shortlisting/mtech_process/output/'
+outDir = wrkDir + 'MTech_shortlisting/mtech_process/output/'
 outfile = outDir + 'scee_power_coap_selected.xls'
 outfileWL = outDir + 'scee_power_coap_WL.xls'
 

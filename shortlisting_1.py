@@ -9,11 +9,14 @@ Created on Fri May 29 16:40:21 2020
 import pandas as pd
 import numpy as np
 
+# working dir
+wrkDir = '/home/paddy/pappu/academic/msPhdCandidatesShortlisting/may2020/mtechShorlisting2020/'
+
 # read the input
-inputFile = '/home/paddy/laptopLocal/localWork/msPhDAug2020/MTech_shortlisting/PGApplciationReport_29May2020.xls'
+inputFile = wrkDir + 'MTech_shortlisting/PGApplciationReport_29May2020.xls'
 data = pd.read_excel(inputFile)
 
-outputDir = '/home/paddy/laptopLocal/localWork/msPhDAug2020/MTech_shortlisting/mtech_process/output/'
+outputDir = wrkDir + 'MTech_shortlisting/mtech_process/output/'
 
 # convert UG score into CGPA
 # This has to be automated in the form
@@ -115,7 +118,7 @@ catSt = 'ST'
 x_deg_gate_cat = x_deg_gate[(x_deg_gate.CasteCategoryName==catGen) | (x_deg_gate.CasteCategoryName==catObcCl)]
 
 # check gate_score
-gateCutoff = 500
+gateCutoff = 600
 x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
 
 # check UG marks
@@ -139,7 +142,7 @@ x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 x_deg_gate_cat = x_deg_gate[x_deg_gate.CasteCategoryName==catObcNcl]
 
 # check gate_score
-gateCutoff = 500
+gateCutoff = 600
 x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
 
 # check UG marks
@@ -160,7 +163,7 @@ x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 x_deg_gate_cat = x_deg_gate[x_deg_gate.CasteCategoryName==catSc]
 
 # check gate_score
-gateCutoff = 400
+gateCutoff = 450
 x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
 
 # check UG marks
@@ -180,7 +183,7 @@ x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 x_deg_gate_cat = x_deg_gate[x_deg_gate.CasteCategoryName==catEws]
 
 # check gate_score
-gateCutoff = 500
+gateCutoff = 600
 x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
 
 # check UG marks
@@ -203,7 +206,7 @@ x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 x_deg_gate_cat = x_deg_gate[x_deg_gate.CasteCategoryName==catSt]
 
 # check gate_score
-gateCutoff = 400
+gateCutoff = 450
 x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
 
 # check UG marks
@@ -227,7 +230,7 @@ x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 x_deg_gate_cat = x_deg_gate[x_deg_gate.ISPhysicallyChallenged=='Yes']
 
 # check gate_score
-gateCutoff = 400
+gateCutoff = 450
 x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
 
 # check UG marks
