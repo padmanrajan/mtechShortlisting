@@ -10,7 +10,9 @@ import pandas as pd
 import numpy as np
 
 # working dir
-wrkDir = '/home/paddy/pappu/academic/msPhdCandidatesShortlisting/may2020/mtechShorlisting2020/'
+#wrkDir = '/home/paddy/pappu/academic/msPhdCandidatesShortlisting/may2020/mtechShorlisting2020/'
+wrkDir = '/home/paddy/laptopLocal/localWork/msPhDAug2020/'
+
 
 # read the input
 inputFile = wrkDir + 'MTech_shortlisting/PGApplciationReport_29May2020.xls'

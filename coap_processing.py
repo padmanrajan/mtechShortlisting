@@ -62,7 +62,9 @@ def processGateNumber(df):
 
 
 # datafiles
-wrkDir = '/home/paddy/pappu/academic/msPhdCandidatesShortlisting/may2020/mtechShorlisting2020/'
+#wrkDir = '/home/paddy/pappu/academic/msPhdCandidatesShortlisting/may2020/mtechShorlisting2020/'
+wrkDir = '/home/paddy/laptopLocal/localWork/msPhDAug2020/'
+
 dataDir = wrkDir + 'MTech_shortlisting/mtech_process/output/'
 genDataFile = dataDir + 'spcom_genObccl.xls'
 obcDataFile = dataDir + 'spcom_obcNcl.xls'
@@ -73,12 +75,12 @@ pdDataFile = dataDir + 'spcom_pd.xls'
 
 strProgramName = 'MTech'
 # seat matrix
-genCount = 17
-obcCount = 10
-scCount = 6
-stCount = 3
+genCount = 8
+obcCount = 5
+scCount = 3
+stCount = 1
 ewsCount = 1
-pdCount = 2
+pdCount = 1
 outDir = wrkDir + 'MTech_shortlisting/mtech_process/output/'
 outfile = outDir + 'scee_spcom_coap_selected.xls'
 outfileWL = outDir + 'scee_spcom_coap_WL.xls'
