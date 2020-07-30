@@ -10,8 +10,8 @@ import pandas as pd
 import numpy as np
 
 # working dir
-#wrkDir = '/home/paddy/pappu/academic/msPhdCandidatesShortlisting/may2020/mtechShorlisting2020/'
-wrkDir = '/home/paddy/laptopLocal/localWork/msPhDAug2020/'
+wrkDir = '/home/paddy/pappu/academic/msPhdCandidatesShortlisting/may2020/mtechShorlisting2020/'
+#wrkDir = '/home/paddy/laptopLocal/localWork/msPhDAug2020/'
 
 
 # read the input
@@ -91,7 +91,7 @@ x = data[(data.MainArea1==pgmString) | (data.MainArea2==pgmString) |
 # check the correct UG degree
 string1 = 'ECE'
 string2 = 'EEE'
-string3 = 'IN'
+string3 = 'INS'
 x_deg = x[(x.NewUG==string1)|(x.NewUG==string2)|(x.NewUG==string3)]
 
 
