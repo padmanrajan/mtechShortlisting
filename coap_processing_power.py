@@ -62,8 +62,8 @@ def processGateNumber(df):
 
 
 # datafiles
-#wrkDir = '/home/paddy/pappu/academic/msPhdCandidatesShortlisting/may2020/mtechShorlisting2020/'
-wrkDir = '/home/paddy/laptopLocal/localWork/msPhDAug2020/'
+wrkDir = '/home/paddy/pappu/academic/msPhdCandidatesShortlisting/may2020/mtechShorlisting2020/'
+#wrkDir = '/home/paddy/laptopLocal/localWork/msPhDAug2020/'
 
 dataDir = wrkDir + 'MTech_shortlisting/mtech_process/output/'
 genDataFile = dataDir + 'power_genObccl.xls'
