@@ -173,7 +173,7 @@ x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 x_deg_gate_cat = x_deg_gate[x_deg_gate.CasteCategoryName==catSc]
 
 # check gate_score
-gateCutoff = 435
+gateCutoff = 430
 x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
 
 # check UG marks
@@ -216,7 +216,7 @@ x_deg_gate_cat_gscore_ugscore.to_excel(outFile)
 x_deg_gate_cat = x_deg_gate[x_deg_gate.CasteCategoryName==catSt]
 
 # check gate_score
-gateCutoff = 450
+gateCutoff = 375
 x_deg_gate_cat_gscore = x_deg_gate_cat[x_deg_gate_cat.EntranceScore >= gateCutoff]
 
 # check UG marks
